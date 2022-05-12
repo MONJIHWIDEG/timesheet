@@ -3,6 +3,7 @@ package tn.esprit.spring.controller;
 import java.util.Date;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.entities.Contrat;
+import tn.esprit.spring.entities.ContratModel;
 import tn.esprit.spring.entities.Employe;
+import tn.esprit.spring.entities.EmployeModel;
 import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.entities.Mission;
 import tn.esprit.spring.entities.Timesheet;
@@ -41,8 +44,10 @@ public class RestControlEmploye {
 	//{"id":1,"nom":"kallel", "prenom":"khaled", "email":"Khaled.kallel@ssiiconsulting.tn", "isActif":true, "role":"INGENIEUR"}
 	
 	@PostMapping("/ajouterEmployer")
-	public Employe ajouterEmploye(@RequestBody Employe employe)
+	public Employe ajouterEmploye(@RequestBody EmployeModel employeM)
 	{
+		ModelMapper modelMapper = new ModelMapper();
+		Employe employe = modelMapper.map(employeM, Employe.class);
 		iemployeservice.ajouterEmploye(employe);
 		return employe;
 	}
@@ -69,7 +74,9 @@ public class RestControlEmploye {
 	// http://localhost:8081/SpringMVC/servlet/ajouterContrat
 	//{"reference":6,"dateDebut":"2020-03-01","salaire":2000,"typeContrat":"CDD"}
 	@PostMapping("/ajouterContrat")
-	public int ajouterContrat(@RequestBody Contrat contrat) {
+	public int ajouterContrat(@RequestBody ContratModel contratM) {
+		ModelMapper modelMapper = new ModelMapper();
+		Contrat contrat = modelMapper.map(contratM, Contrat.class);
 		iemployeservice.ajouterContrat(contrat);
 		return contrat.getReference();
 	}
