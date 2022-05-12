@@ -1,5 +1,4 @@
 package tn.esprit.spring.entities;
-
 import java.util.List;
 
 import javax.persistence.ManyToMany;
