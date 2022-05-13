@@ -10,7 +10,7 @@ class TimesheetSpringBootCoreDataJpaMvcRestApplicationTests {
 
 	@Test
 	void contextLoads() {
-		System.out.println("test");
+		System.out.println("first test");
 		String st1="test";
 		assertEquals("test", st1);
 	}
